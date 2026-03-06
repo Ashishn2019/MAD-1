@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row align-items-center">
+
+    <div class="col-md-6 text-center">
+        <img src="{{ url_for('static', filename='images/login_registration.png') }}" class="img-fluid"
+            style="max-height: 400px;">
+    </div>
+
+    <div class="col-md-5 offset-md-1">
+        <div class="clean-card p-5">
+            <h2 class="fw-bold text-primary mb-4">Create Account</h2>
+
+            <form method="POST">
+
+                <div class="mb-3">
+                    <select name="role" class="form-select form-select-lg" required>
+                        <option value="student">Student</option>
+                        <option value="company">Company</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" name="username" class="form-control form-control-lg" placeholder="Username"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <input type="email" name="email" class="form-control form-control-lg" placeholder="Email" required>
+                </div>
+
+                <div class="mb-4">
+                    <input type="password" name="password" class="form-control form-control-lg" placeholder="Password"
+                        required>
+                </div>
+
+                <!-- Role Specific Fields -->
+                <div id="student-fields" style="display: block;">
+                    <div class="mb-4">
+                        <input type="url" name="linkedin_id" class="form-control form-control-lg"
+                            placeholder="LinkedIn URL (Optional)">
+                    </div>
+                </div>
+
+                <div id="company-fields" style="display: none;">
+                    <div class="mb-3">
+                        <textarea name="description" class="form-control form-control-lg" rows="3"
+                            placeholder="Company Description"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <input type="url" name="website" class="form-control form-control-lg"
+                            placeholder="Website or LinkedIn URL">
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-lg w-100">
+                    Register
+                </button>
+
+            </form>
+
+            <div class="text-center mt-4">
+                <a href="{{ url_for('login') }}">Already have an account?</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const roleSelect = document.querySelector("select[name='role']");
+        const studentFields = document.getElementById("student-fields");
+        const companyFields = document.getElementById("company-fields");
+
+        function toggleFields() {
+            if (roleSelect.value === "student") {
+                studentFields.style.display = "block";
+                companyFields.style.display = "none";
+            } else {
+                studentFields.style.display = "none";
+                companyFields.style.display = "block";
+            }
+        }
+
+        roleSelect.addEventListener("change", toggleFields);
+        toggleFields(); // run on initial load
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+
+    <!-- Sidebar -->
+    <div class="col-md-3">
+        <div class="clean-card p-4">
+            <h5 class="fw-bold mb-4 text-primary">Navigation</h5>
+
+            <div class="d-grid gap-2">
+                {% block sidebar %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9">
+        {% block dashboard_content %}{% endblock %}
+    </div>
+
+</div>
+
+{% endblock %}
